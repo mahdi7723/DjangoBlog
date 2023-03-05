@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ListPost
+{% endblock title %}
+
+
+{% block content %}
+    <main id="main">
+        <!-- ======= Blog Section ======= -->
+        <section id="blog" class="blog-mf sect-pt4 route">
+            <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                <div class="title-box text-center">
+                    <h3 class="title-a">
+                    Blog
+                    </h3>
+                    <p class="subtitle-a">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    </p>
+                    <div class="line-mf"></div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-md-4">
+                    <div class="card card-blog">
+                        
+                        {% for post in posts %}
+                            <div class="card-img">
+                            <a href="{{post.get_absolute_url}}"><img src="{{ post.img.url }}" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="card-body">
+                            <div class="card-category-box">
+                                <div class="card-category">
+                                    <h6 class="category">
+                                        {% for tag in post.tags.all %}{{tag.name}}{% endfor %}
+                                    </h6>
+                                </div>
+                            </div>
+                            <h3 class="card-title"><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h3>
+                            <p class="card-description">
+                                {{ post.body }}
+                            </p>
+                            </div>
+                            <div class="card-footer">
+                            <div class="post-author">
+                                <span class="author">{{ post.author }}</span>
+                            </div>
+                            <div class="post-date">
+                                <span class="bi bi-clock">{{ post.created }}</span>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section><!-- End Blog Section -->
+    </main>
+{% endblock content %}
+    
+    

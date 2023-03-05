@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    DetailPost
+{% endblock title %}
+
+{% block content %}
+<main id="main">
+
+    <!-- ======= Blog Single Section ======= -->
+    <section class="blog-wrapper sect-pt4" id="blog">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="post-box">
+              <div class="post-thumb">
+                <img src="{{ post.img.url }}" class="img-fluid" alt="">
+              </div>
+              <div class="post-meta">
+                <h1 class="article-title">{{ post.title }}</h1>
+                <ul>
+                  <li>
+                    <span class="bi bi-person"></span>
+                    <a href="#">{{ post.author }}</a>
+                  </li>
+                  <li>
+                    <span class="bi bi-tag"></span>
+                    <a href="{% url 'post_list' tag.slug %}">{{tag.name}}</a>
+                  </li>
+                  <li>
+                    <span class="bi bi-chat-left-text"> {{ post.created }} </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="article-content">
+                <p>
+                  {{ post.body }}
+                </p>
+              </div>
+            </div>
+            <div class="box-comments">
+              <div class="title-box-2">
+                {% with comments.count as total_comments %}
+                  <h4 class="title-comments title-left">{{total_comments}}</h4>
+                {% endwith %}
+              </div>
+              <ul class="list-comments">
+                {% for cm in comments %}
+                  <li>
+                    <div class="comment-details">
+                      <h4 class="comment-author">{{cm.name}}</h4>
+                      <span>18 Sep 2017</span>
+                      <p>
+                           {{cm.body}}
+                      </p>
+                      <a href="3">Reply</a>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="form-comments">
+              <div class="title-box-2">
+                <h3 class="title-left">
+                  Leave a Reply
+                </h3>
+              </div>
+              <form class="form-mf">
+                <div class="row">
+                  {% csrf_token %}
+                    {% for field in form %}
+                    <div>
+                        {{ field.errors }}
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                  <div class="col-md-12">
+                    <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="widget-sidebar sidebar-search">
+              <h5 class="sidebar-title">Search</h5>
+              <div class="sidebar-content">
+                <form>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary btn-search" type="button">
+                        <span class="bi bi-search"></span>
+                      </button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="widget-sidebar">
+              <h5 class="sidebar-title">Recent Post</h5>
+              <div class="sidebar-content">
+                <ul class="list-sidebar">
+                  <li>
+                    <a href="#">Atque placeat maiores.</a>
+                  </li>
+                  <li>
+                    <a href="#">Lorem ipsum dolor sit amet consectetur</a>
+                  </li>
+                  <li>
+                    <a href="#">Nam quo autem exercitationem.</a>
+                  </li>
+                  <li>
+                    <a href="#">Atque placeat maiores nam quo autem</a>
+                  </li>
+                  <li>
+                    <a href="#">Nam quo autem exercitationem.</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="widget-sidebar">
+              <h5 class="sidebar-title">Archives</h5>
+              <div class="sidebar-content">
+                <ul class="list-sidebar">
+                  <li>
+                    <a href="#">September, 2017.</a>
+                  </li>
+                  <li>
+                    <a href="#">April, 2017.</a>
+                  </li>
+                  <li>
+                    <a href="#">Nam quo autem exercitationem.</a>
+                  </li>
+                  <li>
+                    <a href="#">Atque placeat maiores nam quo autem</a>
+                  </li>
+                  <li>
+                    <a href="#">Nam quo autem exercitationem.</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="widget-sidebar widget-tags">
+              <h5 class="sidebar-title">Tags</h5>
+              <div class="sidebar-content">
+                <ul>
+                  <li>
+                    <a href="#">Web.</a>
+                  </li>
+                  <li>
+                    <a href="#">Design.</a>
+                  </li>
+                  <li>
+                    <a href="#">Travel.</a>
+                  </li>
+                  <li>
+                    <a href="#">Photoshop</a>
+                  </li>
+                  <li>
+                    <a href="#">Corel Draw</a>
+                  </li>
+                  <li>
+                    <a href="#">JavaScript</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Blog Single Section -->
+
+  </main><!-- End #main -->
+
+{% endblock content %}
+    
